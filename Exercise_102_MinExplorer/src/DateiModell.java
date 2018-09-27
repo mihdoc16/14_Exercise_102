@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
 
@@ -14,7 +15,12 @@ import javax.swing.AbstractListModel;
  */
 public class DateiModell extends AbstractListModel{
 
-    ArrayList<Datei> dateien = new ArrayList<>();
+    ArrayList<File> dateien = new ArrayList<>();
+    
+    public void addFile(String path){
+        dateien.add(new Datei(path));
+        fireIntervalAdded(this, dateien.size()-1, dateien.size()-1);
+    }
     
     @Override
     public int getSize() {

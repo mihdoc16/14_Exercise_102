@@ -1,3 +1,6 @@
+
+import java.io.File;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,11 +13,23 @@
  */
 public class MinExplorerGUI extends javax.swing.JFrame {
 
+    DateiModell model = new DateiModell();
+    
     /**
      * Creates new form MinExplorerGUI
      */
     public MinExplorerGUI() {
         initComponents();
+        
+        File dir = new File(".");
+        
+        model.addFile(dir.getAbsolutePath()+"/..");
+        for (File f : dir.listFiles())  {
+            model.addFile(f.getAbsolutePath());
+        }
+        
+        list.setModel(model);
+        list.setCellRenderer(new FileListRenderer());
     }
 
     /**
@@ -27,16 +42,11 @@ public class MinExplorerGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        list = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(list);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,7 +98,7 @@ public class MinExplorerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> list;
     // End of variables declaration//GEN-END:variables
 }
