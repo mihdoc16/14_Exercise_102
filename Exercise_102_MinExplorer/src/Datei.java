@@ -1,5 +1,7 @@
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,20 +14,20 @@ import java.io.File;
  * @author Dominik
  */
 public class Datei extends File{
-    
-    File f;
-    
-    public Datei(String string) {
-        super(string);
+
+    public Datei(String absolutePath) {
+        super(absolutePath);
     }
     
     @Override
     public String toString(){
-        if(f.isDirectory()){
-            return String.format("%s",f.getName());
+        if(isDirectory()){
+            return this.getName();
         }
         else{
-            return String.format("%s %o %o %s",f.getName(),f.lastModified(),f.getTotalSpace());
+            LocalDateTime ldt = LocalDateTime.ofEpochSecond(this.lastModified()/1000, 0, ZoneOffset.UTC);
+            
+            return this.getName() + " " + this.length() + " KB";
         }
     }
 }
