@@ -15,8 +15,8 @@ public class FileComparer implements Comparator<Datei>{
 
     @Override
     public int compare(Datei t, Datei t1) {
-        if(t.isDirectory()&&t1.isDirectory()){
-            return t.getName().compareTo(t1.getName());
+        if(t.isDirectory()&&t1.isDirectory()==false){
+            return 1;
         }
         return -1;
     }

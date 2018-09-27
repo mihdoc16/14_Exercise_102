@@ -29,7 +29,7 @@ public class Datei extends File{
         else{
             LocalDateTime ldt = LocalDateTime.ofEpochSecond(this.lastModified()/1000, 0, ZoneOffset.UTC);
             
-            return this.getName() + " " + ldt.format(dtf) + " KB";
+            return this.getName() + " " + ldt.format(dtf) + " " + this.length() +" KB";
         }
     }
 }
