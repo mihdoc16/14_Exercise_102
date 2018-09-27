@@ -15,6 +15,10 @@ public class Main {
      public static void main(String[] args) {
         File dir = new File(".");
          for (File f : dir.listFiles()) {
+             File f1 = f.getParentFile();
+            // File f2 = f1.getParentFile();
+             String v = f1.getAbsolutePath();
+             System.out.println(v);
              System.out.println(f.getAbsolutePath());
          }
     }

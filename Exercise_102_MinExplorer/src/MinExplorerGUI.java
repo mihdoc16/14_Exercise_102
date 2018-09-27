@@ -1,5 +1,6 @@
 
 import java.io.File;
+import java.util.Collections;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,7 +28,7 @@ public class MinExplorerGUI extends javax.swing.JFrame {
         for (File f : dir.listFiles())  {
             model.addFile(f.getAbsolutePath());
         }
-        
+        model.sort();
         list.setModel(model);
         list.setCellRenderer(new FileListRenderer());
     }
@@ -46,6 +47,11 @@ public class MinExplorerGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(list);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -61,6 +67,30 @@ public class MinExplorerGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listMouseClicked
+        int x = list.getSelectedIndex();
+        Datei d = model.getElementAt(x);
+        //if(d instanceof Datei){
+        if(x==0){
+            System.out.println(d.getAbsolutePath());
+            String path = ((Datei) d).getParent();
+            System.out.println(path);
+            model.wechseln(path);
+            model.sort();
+//                for (File f : ((Datei) d).listFiles()) {
+//                    model.wechseln(f.getAbsolutePath());
+//                }
+                //model.wechseln(path);
+//            Datei datei = (Datei)d;
+//            File i = new File(datei.getParent());
+//            model.addFile(datei.getParent()+"/..");
+//            for (File f : datei.getParentFile().listFiles()) {
+//                model.addFile(f.getParent());
+//            }
+        }
+       // }
+    }//GEN-LAST:event_listMouseClicked
 
     /**
      * @param args the command line arguments

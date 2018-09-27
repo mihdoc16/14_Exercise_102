@@ -2,6 +2,7 @@
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,13 +22,14 @@ public class Datei extends File{
     
     @Override
     public String toString(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.MM.YYYY HH:mm");
         if(isDirectory()){
             return this.getName();
         }
         else{
             LocalDateTime ldt = LocalDateTime.ofEpochSecond(this.lastModified()/1000, 0, ZoneOffset.UTC);
             
-            return this.getName() + " " + this.length() + " KB";
+            return this.getName() + " " + ldt.format(dtf) + " KB";
         }
     }
 }

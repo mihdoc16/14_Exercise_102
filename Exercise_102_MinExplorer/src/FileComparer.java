@@ -11,11 +11,14 @@ import java.util.Comparator;
  *
  * @author Dominik
  */
-public class FileComparer implements Comparator{
+public class FileComparer implements Comparator<Datei>{
 
     @Override
-    public int compare(Object o, Object o1) {
-        
+    public int compare(Datei t, Datei t1) {
+        if(t.isDirectory()&&t1.isDirectory()){
+            return t.getName().compareTo(t1.getName());
+        }
+        return -1;
     }
     
 }

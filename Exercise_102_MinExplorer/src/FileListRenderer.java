@@ -27,11 +27,18 @@ public class FileListRenderer implements ListCellRenderer{
         if( o instanceof Datei ){
             Datei datei = (Datei)o;
             if(datei.isDirectory()){
-                label.setFont(new Font("Courier New", 12));
+                label.setFont(new Font("Courier New", Font.BOLD + Font.ITALIC, 12));
+                label.setForeground(Color.red);
+                label.setBackground(Color.LIGHT_GRAY);
+            }
+            if(datei.isFile()){
+                label.setFont(new Font("Courier New", 0, 12));
+                label.setForeground(Color.blue);
+                label.setBackground(Color.GRAY);
             }
         }
         
-        label.setBackground( isSelected ? Color.lightGray : Color.white );
+        //label.setBackground( isSelected ? Color.lightGray : Color.white );
         
         return label;
     }
